@@ -2,8 +2,8 @@
 **A POC on flink real time streaming with kafka topics and iceberg tables**
 
 ## Create Containers
-docker-compose build --no-cache
-docker-compose up -d
+- docker-compose build --no-cache
+- docker-compose up -d
 
 
 ## Create Kafkgen Connectors
