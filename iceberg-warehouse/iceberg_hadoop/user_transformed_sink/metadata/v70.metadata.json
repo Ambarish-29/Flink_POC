@@ -1,0 +1,2040 @@
+{
+  "format-version" : 2,
+  "table-uuid" : "45a1fea9-0014-477f-b4af-772a10f7426c",
+  "location" : "file:///opt/warehouse/iceberg_hadoop/user_transformed_sink",
+  "last-sequence-number" : 69,
+  "last-updated-ms" : 1751868698077,
+  "last-column-id" : 6,
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "userid",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "gender",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 3,
+      "name" : "regionid",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 4,
+      "name" : "register_time_ts",
+      "required" : false,
+      "type" : "timestamptz"
+    }, {
+      "id" : 5,
+      "name" : "gender_short",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 6,
+      "name" : "window_start",
+      "required" : false,
+      "type" : "timestamptz"
+    } ]
+  } ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "warehouse" : "file:///opt/warehouse/user_transformed_sink",
+    "write.format.default" : "parquet"
+  },
+  "current-snapshot-id" : 4111132272297321390,
+  "refs" : {
+    "main" : {
+      "snapshot-id" : 4111132272297321390,
+      "type" : "branch"
+    }
+  },
+  "snapshots" : [ {
+    "sequence-number" : 1,
+    "snapshot-id" : 6509887587124341899,
+    "timestamp-ms" : 1751820826880,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "1",
+      "added-data-files" : "1",
+      "added-records" : "614",
+      "added-files-size" : "7043",
+      "changed-partition-count" : "1",
+      "total-records" : "614",
+      "total-files-size" : "7043",
+      "total-data-files" : "1",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-6509887587124341899-1-0d83f723-d408-4e83-848f-4de5318e93a1.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 2,
+    "snapshot-id" : 8327633558504293979,
+    "parent-snapshot-id" : 6509887587124341899,
+    "timestamp-ms" : 1751820841933,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "2",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1837",
+      "changed-partition-count" : "1",
+      "total-records" : "616",
+      "total-files-size" : "8880",
+      "total-data-files" : "2",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8327633558504293979-1-9e403d95-62b0-4d37-aab3-43e95f6ef580.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 3,
+    "snapshot-id" : 1306409461405580705,
+    "parent-snapshot-id" : 8327633558504293979,
+    "timestamp-ms" : 1751820856858,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "3",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "617",
+      "total-files-size" : "10683",
+      "total-data-files" : "3",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-1306409461405580705-1-b86a1aef-2b19-4f5d-9a44-aeaa5aab6100.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 4,
+    "snapshot-id" : 9010022674508226167,
+    "parent-snapshot-id" : 1306409461405580705,
+    "timestamp-ms" : 1751820871857,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "4",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "618",
+      "total-files-size" : "12478",
+      "total-data-files" : "4",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-9010022674508226167-1-5f435f6b-2b95-4730-9fc9-bf10cdec9ec2.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 5,
+    "snapshot-id" : 3967454208772341143,
+    "parent-snapshot-id" : 9010022674508226167,
+    "timestamp-ms" : 1751820886855,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "5",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1850",
+      "changed-partition-count" : "1",
+      "total-records" : "621",
+      "total-files-size" : "14328",
+      "total-data-files" : "5",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3967454208772341143-1-42870f0d-573e-420a-91c4-276325c8d466.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 6,
+    "snapshot-id" : 8474825315915980840,
+    "parent-snapshot-id" : 3967454208772341143,
+    "timestamp-ms" : 1751820901842,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "6",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1767",
+      "changed-partition-count" : "1",
+      "total-records" : "623",
+      "total-files-size" : "16095",
+      "total-data-files" : "6",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8474825315915980840-1-3e495013-ffe0-402c-ae29-d645432e94f6.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 7,
+    "snapshot-id" : 3959179144595689383,
+    "parent-snapshot-id" : 8474825315915980840,
+    "timestamp-ms" : 1751820916915,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "7",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1775",
+      "changed-partition-count" : "1",
+      "total-records" : "625",
+      "total-files-size" : "17870",
+      "total-data-files" : "7",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3959179144595689383-1-00d7e421-9f2b-494a-84f8-9a87a45a0daf.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 8,
+    "snapshot-id" : 7255950812767269694,
+    "parent-snapshot-id" : 3959179144595689383,
+    "timestamp-ms" : 1751820931851,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "8",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "626",
+      "total-files-size" : "19665",
+      "total-data-files" : "8",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7255950812767269694-1-88185b12-ee2d-49a0-a0dc-d54187d496c1.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 9,
+    "snapshot-id" : 5537455716438702954,
+    "parent-snapshot-id" : 7255950812767269694,
+    "timestamp-ms" : 1751820946833,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "9",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "627",
+      "total-files-size" : "21468",
+      "total-data-files" : "9",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5537455716438702954-1-3b2cbac2-7da6-4801-9cc6-29aa023a9dec.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 10,
+    "snapshot-id" : 826888724939872441,
+    "parent-snapshot-id" : 5537455716438702954,
+    "timestamp-ms" : 1751820961848,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "10",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "628",
+      "total-files-size" : "23271",
+      "total-data-files" : "10",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-826888724939872441-1-3f63faa6-f88f-46c3-b342-85177adbd9fc.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 11,
+    "snapshot-id" : 1583990715202930847,
+    "parent-snapshot-id" : 826888724939872441,
+    "timestamp-ms" : 1751820976843,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "11",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1893",
+      "changed-partition-count" : "1",
+      "total-records" : "630",
+      "total-files-size" : "25164",
+      "total-data-files" : "11",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-1583990715202930847-1-353cf0cb-a271-4031-a6f9-feb6e27cba20.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 12,
+    "snapshot-id" : 3289089965987850614,
+    "parent-snapshot-id" : 1583990715202930847,
+    "timestamp-ms" : 1751820991871,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "12",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "631",
+      "total-files-size" : "26959",
+      "total-data-files" : "12",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3289089965987850614-1-c411c640-371d-4398-9504-fdbdfe4ea122.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 13,
+    "snapshot-id" : 87325972129762923,
+    "parent-snapshot-id" : 3289089965987850614,
+    "timestamp-ms" : 1751821006843,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "13",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1880",
+      "changed-partition-count" : "1",
+      "total-records" : "633",
+      "total-files-size" : "28839",
+      "total-data-files" : "13",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-87325972129762923-1-e915d307-77cd-42bb-971f-d5adb2204c62.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 14,
+    "snapshot-id" : 7126222899830215642,
+    "parent-snapshot-id" : 87325972129762923,
+    "timestamp-ms" : 1751821021845,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "14",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "634",
+      "total-files-size" : "30634",
+      "total-data-files" : "14",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7126222899830215642-1-6c7f2934-54c7-4e4d-9261-76e6813d8772.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 15,
+    "snapshot-id" : 6967356161268002272,
+    "parent-snapshot-id" : 7126222899830215642,
+    "timestamp-ms" : 1751821036828,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "15",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "635",
+      "total-files-size" : "32423",
+      "total-data-files" : "15",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-6967356161268002272-1-1ea670bf-bd45-41c3-8de8-ad310dcace87.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 16,
+    "snapshot-id" : 409769338019170541,
+    "parent-snapshot-id" : 6967356161268002272,
+    "timestamp-ms" : 1751821051875,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "16",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "636",
+      "total-files-size" : "34226",
+      "total-data-files" : "16",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-409769338019170541-1-03ee28d2-07bb-4724-b1e1-0b753bbc23ec.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 17,
+    "snapshot-id" : 1917651506752879247,
+    "parent-snapshot-id" : 409769338019170541,
+    "timestamp-ms" : 1751821066828,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "17",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "2001",
+      "changed-partition-count" : "1",
+      "total-records" : "639",
+      "total-files-size" : "36227",
+      "total-data-files" : "17",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-1917651506752879247-1-bbcdc706-c1a4-430c-9b6b-56d6301050c4.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 18,
+    "snapshot-id" : 7716810921340466123,
+    "parent-snapshot-id" : 1917651506752879247,
+    "timestamp-ms" : 1751821081858,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "18",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "640",
+      "total-files-size" : "38022",
+      "total-data-files" : "18",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7716810921340466123-1-a045437b-0b0e-464a-a04d-acc3c0a4f564.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 19,
+    "snapshot-id" : 7462715244550966085,
+    "parent-snapshot-id" : 7716810921340466123,
+    "timestamp-ms" : 1751821096833,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "19",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1775",
+      "changed-partition-count" : "1",
+      "total-records" : "642",
+      "total-files-size" : "39797",
+      "total-data-files" : "19",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7462715244550966085-1-fe670575-5f2f-4718-bd40-69767c4511b7.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 20,
+    "snapshot-id" : 8367814246887012885,
+    "parent-snapshot-id" : 7462715244550966085,
+    "timestamp-ms" : 1751821111867,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "20",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1880",
+      "changed-partition-count" : "1",
+      "total-records" : "644",
+      "total-files-size" : "41677",
+      "total-data-files" : "20",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8367814246887012885-1-af39ceae-3746-4a0b-abfc-b2b27bcc2a72.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 21,
+    "snapshot-id" : 9128053759394983843,
+    "parent-snapshot-id" : 8367814246887012885,
+    "timestamp-ms" : 1751821141862,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "22",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "645",
+      "total-files-size" : "43480",
+      "total-data-files" : "21",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-9128053759394983843-1-9a5cad24-848f-4cef-8717-bc7c1d4a3b85.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 22,
+    "snapshot-id" : 289981713069961342,
+    "parent-snapshot-id" : 9128053759394983843,
+    "timestamp-ms" : 1751821156851,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "23",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "646",
+      "total-files-size" : "45275",
+      "total-data-files" : "22",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-289981713069961342-1-0b806ec4-dc14-445b-8006-b7139d2e039a.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 23,
+    "snapshot-id" : 8528413972551359576,
+    "parent-snapshot-id" : 289981713069961342,
+    "timestamp-ms" : 1751821171836,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "24",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1880",
+      "changed-partition-count" : "1",
+      "total-records" : "648",
+      "total-files-size" : "47155",
+      "total-data-files" : "23",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8528413972551359576-1-7d6a54c6-dfe6-4c24-9dac-68bc1ff00f6e.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 24,
+    "snapshot-id" : 5878663948237223749,
+    "parent-snapshot-id" : 8528413972551359576,
+    "timestamp-ms" : 1751821201832,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "26",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "649",
+      "total-files-size" : "48950",
+      "total-data-files" : "24",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5878663948237223749-1-867f72a6-6b9d-4201-850e-2b57c1cdf6f8.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 25,
+    "snapshot-id" : 9095013014461533344,
+    "parent-snapshot-id" : 5878663948237223749,
+    "timestamp-ms" : 1751821216834,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "27",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1775",
+      "changed-partition-count" : "1",
+      "total-records" : "651",
+      "total-files-size" : "50725",
+      "total-data-files" : "25",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-9095013014461533344-1-43bbc69a-49b9-41f2-a2d5-908d863dcb64.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 26,
+    "snapshot-id" : 4440508336469017461,
+    "parent-snapshot-id" : 9095013014461533344,
+    "timestamp-ms" : 1751821231815,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "28",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1774",
+      "changed-partition-count" : "1",
+      "total-records" : "653",
+      "total-files-size" : "52499",
+      "total-data-files" : "26",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4440508336469017461-1-daf086f7-327c-4472-8c0c-4b19d3e8def4.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 27,
+    "snapshot-id" : 578599818191461373,
+    "parent-snapshot-id" : 4440508336469017461,
+    "timestamp-ms" : 1751821246821,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "29",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1767",
+      "changed-partition-count" : "1",
+      "total-records" : "655",
+      "total-files-size" : "54266",
+      "total-data-files" : "27",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-578599818191461373-1-cf400f1b-f2a4-4029-8a87-99b99e810e18.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 28,
+    "snapshot-id" : 8897493824845467247,
+    "parent-snapshot-id" : 578599818191461373,
+    "timestamp-ms" : 1751821261818,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "30",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1887",
+      "changed-partition-count" : "1",
+      "total-records" : "657",
+      "total-files-size" : "56153",
+      "total-data-files" : "28",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8897493824845467247-1-2f3aac1f-dfb4-40f3-ad93-b9f32956541a.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 29,
+    "snapshot-id" : 8011630027698637778,
+    "parent-snapshot-id" : 8897493824845467247,
+    "timestamp-ms" : 1751821276825,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "31",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1768",
+      "changed-partition-count" : "1",
+      "total-records" : "659",
+      "total-files-size" : "57921",
+      "total-data-files" : "29",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8011630027698637778-1-f3eafbb0-e7d5-4110-af78-0ef55b28d999.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 30,
+    "snapshot-id" : 5582940474657227235,
+    "parent-snapshot-id" : 8011630027698637778,
+    "timestamp-ms" : 1751821291841,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "32",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1839",
+      "changed-partition-count" : "1",
+      "total-records" : "661",
+      "total-files-size" : "59760",
+      "total-data-files" : "30",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5582940474657227235-1-66973c2f-fb12-4b81-ac92-84219e7532f0.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 31,
+    "snapshot-id" : 7137711093520655545,
+    "parent-snapshot-id" : 5582940474657227235,
+    "timestamp-ms" : 1751821306830,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "33",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "662",
+      "total-files-size" : "61555",
+      "total-data-files" : "31",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7137711093520655545-1-4c06840a-7a95-40b2-8bb3-9250cb7eb772.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 32,
+    "snapshot-id" : 5117140816712046999,
+    "parent-snapshot-id" : 7137711093520655545,
+    "timestamp-ms" : 1751821321835,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "34",
+      "added-data-files" : "1",
+      "added-records" : "6",
+      "added-files-size" : "2012",
+      "changed-partition-count" : "1",
+      "total-records" : "668",
+      "total-files-size" : "63567",
+      "total-data-files" : "32",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5117140816712046999-1-9e8d94ce-6f02-422b-b728-b81b66315d0d.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 33,
+    "snapshot-id" : 9007907121475350442,
+    "parent-snapshot-id" : 5117140816712046999,
+    "timestamp-ms" : 1751821336844,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "35",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "669",
+      "total-files-size" : "65362",
+      "total-data-files" : "33",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-9007907121475350442-1-900b673f-2e73-43f1-ade8-3821bafacbb1.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 34,
+    "snapshot-id" : 5248180829903199563,
+    "parent-snapshot-id" : 9007907121475350442,
+    "timestamp-ms" : 1751821351890,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "36",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1945",
+      "changed-partition-count" : "1",
+      "total-records" : "672",
+      "total-files-size" : "67307",
+      "total-data-files" : "34",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5248180829903199563-1-edd3f67a-558c-4c81-8cf8-4bf9a6a865dd.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 35,
+    "snapshot-id" : 9098332124922803930,
+    "parent-snapshot-id" : 5248180829903199563,
+    "timestamp-ms" : 1751821381813,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "38",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1951",
+      "changed-partition-count" : "1",
+      "total-records" : "674",
+      "total-files-size" : "69258",
+      "total-data-files" : "35",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-9098332124922803930-1-2c56526a-c250-4d4c-9f98-e447e10cc9ed.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 36,
+    "snapshot-id" : 401856216549594297,
+    "parent-snapshot-id" : 9098332124922803930,
+    "timestamp-ms" : 1751821411827,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "40",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "675",
+      "total-files-size" : "71061",
+      "total-data-files" : "36",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-401856216549594297-1-88b74404-ebc1-4e10-a2f8-217ed35539f1.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 37,
+    "snapshot-id" : 5715613261550453960,
+    "parent-snapshot-id" : 401856216549594297,
+    "timestamp-ms" : 1751821426798,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "41",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1794",
+      "changed-partition-count" : "1",
+      "total-records" : "676",
+      "total-files-size" : "72855",
+      "total-data-files" : "37",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5715613261550453960-1-8bc4f890-36df-49b5-8ba8-e5c35bb8c178.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 38,
+    "snapshot-id" : 3838034263616206730,
+    "parent-snapshot-id" : 5715613261550453960,
+    "timestamp-ms" : 1751821441790,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "42",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "677",
+      "total-files-size" : "74658",
+      "total-data-files" : "38",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3838034263616206730-1-2795a070-ce07-4b8b-9d66-1149cfec208a.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 39,
+    "snapshot-id" : 4674215588326968843,
+    "parent-snapshot-id" : 3838034263616206730,
+    "timestamp-ms" : 1751821456823,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "43",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1838",
+      "changed-partition-count" : "1",
+      "total-records" : "679",
+      "total-files-size" : "76496",
+      "total-data-files" : "39",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4674215588326968843-1-298b2d66-65f4-410a-aba1-d98c084fc571.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 40,
+    "snapshot-id" : 7675456437255197644,
+    "parent-snapshot-id" : 4674215588326968843,
+    "timestamp-ms" : 1751821471813,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "44",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "680",
+      "total-files-size" : "78285",
+      "total-data-files" : "40",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7675456437255197644-1-c7fb9fcb-048a-48a9-b579-5f0912cb38a8.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 41,
+    "snapshot-id" : 3239850743669754772,
+    "parent-snapshot-id" : 7675456437255197644,
+    "timestamp-ms" : 1751821486818,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "45",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "681",
+      "total-files-size" : "80074",
+      "total-data-files" : "41",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3239850743669754772-1-b3064473-408e-4d19-bcb0-06c1a60599d9.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 42,
+    "snapshot-id" : 7001738977217654437,
+    "parent-snapshot-id" : 3239850743669754772,
+    "timestamp-ms" : 1751821501817,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "46",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "682",
+      "total-files-size" : "81863",
+      "total-data-files" : "42",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7001738977217654437-1-e99ed144-0e54-41c4-a52b-2749309531ef.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 43,
+    "snapshot-id" : 4412696972046696048,
+    "parent-snapshot-id" : 7001738977217654437,
+    "timestamp-ms" : 1751821516830,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "47",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1961",
+      "changed-partition-count" : "1",
+      "total-records" : "685",
+      "total-files-size" : "83824",
+      "total-data-files" : "43",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4412696972046696048-1-932ab483-7849-4f0b-a4a9-5e4d9759c472.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 44,
+    "snapshot-id" : 364630049319016266,
+    "parent-snapshot-id" : 4412696972046696048,
+    "timestamp-ms" : 1751821531830,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "48",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "686",
+      "total-files-size" : "85619",
+      "total-data-files" : "44",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-364630049319016266-1-08836779-dfbb-4e28-aef0-e5f82a59c465.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 45,
+    "snapshot-id" : 5272129859694561843,
+    "parent-snapshot-id" : 364630049319016266,
+    "timestamp-ms" : 1751821546853,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "49",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1765",
+      "changed-partition-count" : "1",
+      "total-records" : "688",
+      "total-files-size" : "87384",
+      "total-data-files" : "45",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5272129859694561843-1-dc91b207-305a-4f3d-b88e-0470a57ef606.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 46,
+    "snapshot-id" : 4916137863762137412,
+    "parent-snapshot-id" : 5272129859694561843,
+    "timestamp-ms" : 1751821561835,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "50",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1771",
+      "changed-partition-count" : "1",
+      "total-records" : "690",
+      "total-files-size" : "89155",
+      "total-data-files" : "46",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4916137863762137412-1-006a15fd-2c49-45c1-8e8a-5b482d0dd5a3.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 47,
+    "snapshot-id" : 5906726673538159440,
+    "parent-snapshot-id" : 4916137863762137412,
+    "timestamp-ms" : 1751821591866,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "52",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1775",
+      "changed-partition-count" : "1",
+      "total-records" : "692",
+      "total-files-size" : "90930",
+      "total-data-files" : "47",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5906726673538159440-1-ad4f9615-298a-4ae5-b6ee-19e94d1eb80d.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 48,
+    "snapshot-id" : 3110573528871129683,
+    "parent-snapshot-id" : 5906726673538159440,
+    "timestamp-ms" : 1751821606860,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "53",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1768",
+      "changed-partition-count" : "1",
+      "total-records" : "694",
+      "total-files-size" : "92698",
+      "total-data-files" : "48",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3110573528871129683-1-2a70ef29-601c-48ff-afd8-4ca8ed1ae430.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 49,
+    "snapshot-id" : 2292530629224336881,
+    "parent-snapshot-id" : 3110573528871129683,
+    "timestamp-ms" : 1751821621847,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "54",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1899",
+      "changed-partition-count" : "1",
+      "total-records" : "697",
+      "total-files-size" : "94597",
+      "total-data-files" : "49",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-2292530629224336881-1-01a7332e-5cf8-48a8-9901-2d8eef8e1efe.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 50,
+    "snapshot-id" : 5801657443502184888,
+    "parent-snapshot-id" : 2292530629224336881,
+    "timestamp-ms" : 1751821636840,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "55",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1803",
+      "changed-partition-count" : "1",
+      "total-records" : "698",
+      "total-files-size" : "96400",
+      "total-data-files" : "50",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5801657443502184888-1-9feed4d4-e72a-445e-a9cc-b577f16b126c.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 51,
+    "snapshot-id" : 4600780627233151525,
+    "parent-snapshot-id" : 5801657443502184888,
+    "timestamp-ms" : 1751821651870,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "56",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1775",
+      "changed-partition-count" : "1",
+      "total-records" : "700",
+      "total-files-size" : "98175",
+      "total-data-files" : "51",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4600780627233151525-1-0d3f138f-a679-4397-bb56-afafd35f56ef.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 52,
+    "snapshot-id" : 854885647429717476,
+    "parent-snapshot-id" : 4600780627233151525,
+    "timestamp-ms" : 1751824641083,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "57",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1846",
+      "changed-partition-count" : "1",
+      "total-records" : "702",
+      "total-files-size" : "100021",
+      "total-data-files" : "52",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-854885647429717476-1-0fcb2adc-70dd-4135-8a5b-5f2699bf9518.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 53,
+    "snapshot-id" : 1239381126596185304,
+    "parent-snapshot-id" : 854885647429717476,
+    "timestamp-ms" : 1751824656077,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "58",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "703",
+      "total-files-size" : "101810",
+      "total-data-files" : "53",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-1239381126596185304-1-bf89a067-d27b-4d35-b309-8b06f7e8b6f5.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 54,
+    "snapshot-id" : 2272926113970733783,
+    "parent-snapshot-id" : 1239381126596185304,
+    "timestamp-ms" : 1751824671092,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "59",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1802",
+      "changed-partition-count" : "1",
+      "total-records" : "704",
+      "total-files-size" : "103612",
+      "total-data-files" : "54",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-2272926113970733783-1-d8e0d4f9-8a8d-497d-bb0e-96619691008f.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 55,
+    "snapshot-id" : 7131339887649992363,
+    "parent-snapshot-id" : 2272926113970733783,
+    "timestamp-ms" : 1751824686105,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "60",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1789",
+      "changed-partition-count" : "1",
+      "total-records" : "705",
+      "total-files-size" : "105401",
+      "total-data-files" : "55",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-7131339887649992363-1-32aea8d0-3d56-48b5-a120-60a5209f2ebc.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 56,
+    "snapshot-id" : 3383269621692701824,
+    "parent-snapshot-id" : 7131339887649992363,
+    "timestamp-ms" : 1751824701065,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "61",
+      "added-data-files" : "1",
+      "added-records" : "2",
+      "added-files-size" : "1766",
+      "changed-partition-count" : "1",
+      "total-records" : "707",
+      "total-files-size" : "107167",
+      "total-data-files" : "56",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-3383269621692701824-1-7b757c0a-0e61-4292-86df-b9d9272175ae.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 57,
+    "snapshot-id" : 5162575206575361645,
+    "parent-snapshot-id" : 3383269621692701824,
+    "timestamp-ms" : 1751824716090,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "62",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "708",
+      "total-files-size" : "108962",
+      "total-data-files" : "57",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-5162575206575361645-1-2c8fe948-50ff-474a-b2ae-e875a5a0f898.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 58,
+    "snapshot-id" : 332934971424816340,
+    "parent-snapshot-id" : 5162575206575361645,
+    "timestamp-ms" : 1751824731135,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "63",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1951",
+      "changed-partition-count" : "1",
+      "total-records" : "711",
+      "total-files-size" : "110913",
+      "total-data-files" : "58",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-332934971424816340-1-2b6ec032-53cb-4cc4-9dae-f4fd59f73c9b.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 59,
+    "snapshot-id" : 1729526715173222846,
+    "parent-snapshot-id" : 332934971424816340,
+    "timestamp-ms" : 1751824746012,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "64",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "1795",
+      "changed-partition-count" : "1",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-1729526715173222846-1-a93ee370-b66a-4de1-9e21-8134eb6d12ca.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 60,
+    "snapshot-id" : 8232124848434318603,
+    "parent-snapshot-id" : 1729526715173222846,
+    "timestamp-ms" : 1751824895846,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "74",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8232124848434318603-1-3647c9a3-dc2e-4a74-816e-de78dbd92898.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 61,
+    "snapshot-id" : 989438077617274652,
+    "parent-snapshot-id" : 8232124848434318603,
+    "timestamp-ms" : 1751825045805,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "84",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-989438077617274652-1-8c074b28-40b9-4f45-92f6-66dca76920a0.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 62,
+    "snapshot-id" : 46607266916773029,
+    "parent-snapshot-id" : 989438077617274652,
+    "timestamp-ms" : 1751825195716,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "94",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-46607266916773029-1-2f6b63cb-a188-4540-ab59-c064c42396cd.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 63,
+    "snapshot-id" : 2083843833931239366,
+    "parent-snapshot-id" : 46607266916773029,
+    "timestamp-ms" : 1751825345648,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "104",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-2083843833931239366-1-52216944-d5bf-4bd3-9b5b-8a6799d2f592.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 64,
+    "snapshot-id" : 8785274662205181380,
+    "parent-snapshot-id" : 2083843833931239366,
+    "timestamp-ms" : 1751865234248,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "121",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8785274662205181380-1-c3b8180f-6992-418f-858f-c394152d8def.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 65,
+    "snapshot-id" : 829033444215249411,
+    "parent-snapshot-id" : 8785274662205181380,
+    "timestamp-ms" : 1751865374818,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "131",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-829033444215249411-1-67456145-54fc-4a92-a5b3-e413b110eba0.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 66,
+    "snapshot-id" : 6495244835398474809,
+    "parent-snapshot-id" : 829033444215249411,
+    "timestamp-ms" : 1751865514566,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "141",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-6495244835398474809-1-36d59829-c633-44cd-bbed-aefdf3ef027a.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 67,
+    "snapshot-id" : 8365997124897434045,
+    "parent-snapshot-id" : 6495244835398474809,
+    "timestamp-ms" : 1751865653980,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "151",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-8365997124897434045-1-08e7e918-d8a1-46e9-9bdd-b255eddc2b97.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 68,
+    "snapshot-id" : 2451359598063501171,
+    "parent-snapshot-id" : 8365997124897434045,
+    "timestamp-ms" : 1751868558346,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "168",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-2451359598063501171-1-e029fe84-74fa-4b2f-a780-3fe73694353f.avro",
+    "schema-id" : 0
+  }, {
+    "sequence-number" : 69,
+    "snapshot-id" : 4111132272297321390,
+    "parent-snapshot-id" : 2451359598063501171,
+    "timestamp-ms" : 1751868698077,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "c27dcf7b54ef6bfd6cff02ca8870b681",
+      "flink.job-id" : "fbc7b02b6378db875551cfe21f1abe53",
+      "flink.max-committed-checkpoint-id" : "178",
+      "changed-partition-count" : "0",
+      "total-records" : "712",
+      "total-files-size" : "112708",
+      "total-data-files" : "59",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/snap-4111132272297321390-1-cbe06e81-82eb-4b3f-9934-2ffade717783.avro",
+    "schema-id" : 0
+  } ],
+  "statistics" : [ ],
+  "snapshot-log" : [ {
+    "timestamp-ms" : 1751820826880,
+    "snapshot-id" : 6509887587124341899
+  }, {
+    "timestamp-ms" : 1751820841933,
+    "snapshot-id" : 8327633558504293979
+  }, {
+    "timestamp-ms" : 1751820856858,
+    "snapshot-id" : 1306409461405580705
+  }, {
+    "timestamp-ms" : 1751820871857,
+    "snapshot-id" : 9010022674508226167
+  }, {
+    "timestamp-ms" : 1751820886855,
+    "snapshot-id" : 3967454208772341143
+  }, {
+    "timestamp-ms" : 1751820901842,
+    "snapshot-id" : 8474825315915980840
+  }, {
+    "timestamp-ms" : 1751820916915,
+    "snapshot-id" : 3959179144595689383
+  }, {
+    "timestamp-ms" : 1751820931851,
+    "snapshot-id" : 7255950812767269694
+  }, {
+    "timestamp-ms" : 1751820946833,
+    "snapshot-id" : 5537455716438702954
+  }, {
+    "timestamp-ms" : 1751820961848,
+    "snapshot-id" : 826888724939872441
+  }, {
+    "timestamp-ms" : 1751820976843,
+    "snapshot-id" : 1583990715202930847
+  }, {
+    "timestamp-ms" : 1751820991871,
+    "snapshot-id" : 3289089965987850614
+  }, {
+    "timestamp-ms" : 1751821006843,
+    "snapshot-id" : 87325972129762923
+  }, {
+    "timestamp-ms" : 1751821021845,
+    "snapshot-id" : 7126222899830215642
+  }, {
+    "timestamp-ms" : 1751821036828,
+    "snapshot-id" : 6967356161268002272
+  }, {
+    "timestamp-ms" : 1751821051875,
+    "snapshot-id" : 409769338019170541
+  }, {
+    "timestamp-ms" : 1751821066828,
+    "snapshot-id" : 1917651506752879247
+  }, {
+    "timestamp-ms" : 1751821081858,
+    "snapshot-id" : 7716810921340466123
+  }, {
+    "timestamp-ms" : 1751821096833,
+    "snapshot-id" : 7462715244550966085
+  }, {
+    "timestamp-ms" : 1751821111867,
+    "snapshot-id" : 8367814246887012885
+  }, {
+    "timestamp-ms" : 1751821141862,
+    "snapshot-id" : 9128053759394983843
+  }, {
+    "timestamp-ms" : 1751821156851,
+    "snapshot-id" : 289981713069961342
+  }, {
+    "timestamp-ms" : 1751821171836,
+    "snapshot-id" : 8528413972551359576
+  }, {
+    "timestamp-ms" : 1751821201832,
+    "snapshot-id" : 5878663948237223749
+  }, {
+    "timestamp-ms" : 1751821216834,
+    "snapshot-id" : 9095013014461533344
+  }, {
+    "timestamp-ms" : 1751821231815,
+    "snapshot-id" : 4440508336469017461
+  }, {
+    "timestamp-ms" : 1751821246821,
+    "snapshot-id" : 578599818191461373
+  }, {
+    "timestamp-ms" : 1751821261818,
+    "snapshot-id" : 8897493824845467247
+  }, {
+    "timestamp-ms" : 1751821276825,
+    "snapshot-id" : 8011630027698637778
+  }, {
+    "timestamp-ms" : 1751821291841,
+    "snapshot-id" : 5582940474657227235
+  }, {
+    "timestamp-ms" : 1751821306830,
+    "snapshot-id" : 7137711093520655545
+  }, {
+    "timestamp-ms" : 1751821321835,
+    "snapshot-id" : 5117140816712046999
+  }, {
+    "timestamp-ms" : 1751821336844,
+    "snapshot-id" : 9007907121475350442
+  }, {
+    "timestamp-ms" : 1751821351890,
+    "snapshot-id" : 5248180829903199563
+  }, {
+    "timestamp-ms" : 1751821381813,
+    "snapshot-id" : 9098332124922803930
+  }, {
+    "timestamp-ms" : 1751821411827,
+    "snapshot-id" : 401856216549594297
+  }, {
+    "timestamp-ms" : 1751821426798,
+    "snapshot-id" : 5715613261550453960
+  }, {
+    "timestamp-ms" : 1751821441790,
+    "snapshot-id" : 3838034263616206730
+  }, {
+    "timestamp-ms" : 1751821456823,
+    "snapshot-id" : 4674215588326968843
+  }, {
+    "timestamp-ms" : 1751821471813,
+    "snapshot-id" : 7675456437255197644
+  }, {
+    "timestamp-ms" : 1751821486818,
+    "snapshot-id" : 3239850743669754772
+  }, {
+    "timestamp-ms" : 1751821501817,
+    "snapshot-id" : 7001738977217654437
+  }, {
+    "timestamp-ms" : 1751821516830,
+    "snapshot-id" : 4412696972046696048
+  }, {
+    "timestamp-ms" : 1751821531830,
+    "snapshot-id" : 364630049319016266
+  }, {
+    "timestamp-ms" : 1751821546853,
+    "snapshot-id" : 5272129859694561843
+  }, {
+    "timestamp-ms" : 1751821561835,
+    "snapshot-id" : 4916137863762137412
+  }, {
+    "timestamp-ms" : 1751821591866,
+    "snapshot-id" : 5906726673538159440
+  }, {
+    "timestamp-ms" : 1751821606860,
+    "snapshot-id" : 3110573528871129683
+  }, {
+    "timestamp-ms" : 1751821621847,
+    "snapshot-id" : 2292530629224336881
+  }, {
+    "timestamp-ms" : 1751821636840,
+    "snapshot-id" : 5801657443502184888
+  }, {
+    "timestamp-ms" : 1751821651870,
+    "snapshot-id" : 4600780627233151525
+  }, {
+    "timestamp-ms" : 1751824641083,
+    "snapshot-id" : 854885647429717476
+  }, {
+    "timestamp-ms" : 1751824656077,
+    "snapshot-id" : 1239381126596185304
+  }, {
+    "timestamp-ms" : 1751824671092,
+    "snapshot-id" : 2272926113970733783
+  }, {
+    "timestamp-ms" : 1751824686105,
+    "snapshot-id" : 7131339887649992363
+  }, {
+    "timestamp-ms" : 1751824701065,
+    "snapshot-id" : 3383269621692701824
+  }, {
+    "timestamp-ms" : 1751824716090,
+    "snapshot-id" : 5162575206575361645
+  }, {
+    "timestamp-ms" : 1751824731135,
+    "snapshot-id" : 332934971424816340
+  }, {
+    "timestamp-ms" : 1751824746012,
+    "snapshot-id" : 1729526715173222846
+  }, {
+    "timestamp-ms" : 1751824895846,
+    "snapshot-id" : 8232124848434318603
+  }, {
+    "timestamp-ms" : 1751825045805,
+    "snapshot-id" : 989438077617274652
+  }, {
+    "timestamp-ms" : 1751825195716,
+    "snapshot-id" : 46607266916773029
+  }, {
+    "timestamp-ms" : 1751825345648,
+    "snapshot-id" : 2083843833931239366
+  }, {
+    "timestamp-ms" : 1751865234248,
+    "snapshot-id" : 8785274662205181380
+  }, {
+    "timestamp-ms" : 1751865374818,
+    "snapshot-id" : 829033444215249411
+  }, {
+    "timestamp-ms" : 1751865514566,
+    "snapshot-id" : 6495244835398474809
+  }, {
+    "timestamp-ms" : 1751865653980,
+    "snapshot-id" : 8365997124897434045
+  }, {
+    "timestamp-ms" : 1751868558346,
+    "snapshot-id" : 2451359598063501171
+  }, {
+    "timestamp-ms" : 1751868698077,
+    "snapshot-id" : 4111132272297321390
+  } ],
+  "metadata-log" : [ {
+    "timestamp-ms" : 1751820506466,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v1.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820826880,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v2.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820841933,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v3.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820856858,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v4.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820871857,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v5.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820886855,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v6.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820901842,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v7.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820916915,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v8.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820931851,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v9.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820946833,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v10.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820961848,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v11.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820976843,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v12.metadata.json"
+  }, {
+    "timestamp-ms" : 1751820991871,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v13.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821006843,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v14.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821021845,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v15.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821036828,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v16.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821051875,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v17.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821066828,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v18.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821081858,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v19.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821096833,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v20.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821111867,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v21.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821141862,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v22.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821156851,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v23.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821171836,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v24.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821201832,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v25.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821216834,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v26.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821231815,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v27.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821246821,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v28.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821261818,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v29.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821276825,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v30.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821291841,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v31.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821306830,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v32.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821321835,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v33.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821336844,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v34.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821351890,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v35.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821381813,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v36.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821411827,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v37.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821426798,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v38.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821441790,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v39.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821456823,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v40.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821471813,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v41.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821486818,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v42.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821501817,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v43.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821516830,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v44.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821531830,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v45.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821546853,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v46.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821561835,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v47.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821591866,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v48.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821606860,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v49.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821621847,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v50.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821636840,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v51.metadata.json"
+  }, {
+    "timestamp-ms" : 1751821651870,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v52.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824641083,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v53.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824656077,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v54.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824671092,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v55.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824686105,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v56.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824701065,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v57.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824716090,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v58.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824731135,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v59.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824746012,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v60.metadata.json"
+  }, {
+    "timestamp-ms" : 1751824895846,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v61.metadata.json"
+  }, {
+    "timestamp-ms" : 1751825045805,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v62.metadata.json"
+  }, {
+    "timestamp-ms" : 1751825195716,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v63.metadata.json"
+  }, {
+    "timestamp-ms" : 1751825345648,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v64.metadata.json"
+  }, {
+    "timestamp-ms" : 1751865234248,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v65.metadata.json"
+  }, {
+    "timestamp-ms" : 1751865374818,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v66.metadata.json"
+  }, {
+    "timestamp-ms" : 1751865514566,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v67.metadata.json"
+  }, {
+    "timestamp-ms" : 1751865653980,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v68.metadata.json"
+  }, {
+    "timestamp-ms" : 1751868558346,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_transformed_sink/metadata/v69.metadata.json"
+  } ]
+}

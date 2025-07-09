@@ -1,0 +1,66 @@
+{
+  "format-version" : 1,
+  "table-uuid" : "98f98a62-7e01-4061-8a74-4925fd1799ce",
+  "location" : "file:///opt/warehouse/iceberg_hadoop/user_metadata_v4",
+  "last-updated-ms" : 1751896223342,
+  "last-column-id" : 2,
+  "schema" : {
+    "type" : "struct",
+    "schema-id" : 0,
+    "identifier-field-ids" : [ 1 ],
+    "fields" : [ {
+      "id" : 1,
+      "name" : "userid",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "extra_info",
+      "required" : false,
+      "type" : "string"
+    } ]
+  },
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "identifier-field-ids" : [ 1 ],
+    "fields" : [ {
+      "id" : 1,
+      "name" : "userid",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "extra_info",
+      "required" : false,
+      "type" : "string"
+    } ]
+  } ],
+  "partition-spec" : [ ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "path" : "file:///opt/warehouse/user_metadata_v1",
+    "streaming" : "true",
+    "connector" : "filesystem",
+    "monitor-interval" : "10s",
+    "format" : "parquet",
+    "streaming-starting-strategy" : "TABLE_SCAN_THEN_INCREMENTAL"
+  },
+  "current-snapshot-id" : -1,
+  "refs" : { },
+  "snapshots" : [ ],
+  "statistics" : [ ],
+  "snapshot-log" : [ ],
+  "metadata-log" : [ ]
+}

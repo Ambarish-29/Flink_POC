@@ -1,0 +1,13 @@
+{
+  "name": "datagen-json",
+  "config": {
+    "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
+    "kafka.topic": "source_topic_v7",
+    "quickstart": "users",
+    "max.interval": 20000,
+    "iterations": -1,
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": false
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "format-version" : 1,
+  "table-uuid" : "02982f12-7004-4a4b-8a40-81e0e02dbfcb",
+  "location" : "file:///opt/warehouse/iceberg_hadoop/user_metadata_v5",
+  "last-updated-ms" : 1751956778041,
+  "last-column-id" : 2,
+  "schema" : {
+    "type" : "struct",
+    "schema-id" : 0,
+    "identifier-field-ids" : [ 1 ],
+    "fields" : [ {
+      "id" : 1,
+      "name" : "userid",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "extra_info",
+      "required" : false,
+      "type" : "string"
+    } ]
+  },
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "identifier-field-ids" : [ 1 ],
+    "fields" : [ {
+      "id" : 1,
+      "name" : "userid",
+      "required" : true,
+      "type" : "string"
+    }, {
+      "id" : 2,
+      "name" : "extra_info",
+      "required" : false,
+      "type" : "string"
+    } ]
+  } ],
+  "partition-spec" : [ ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "path" : "file:///opt/warehouse/user_metadata_v5",
+    "streaming" : "true",
+    "connector" : "filesystem",
+    "monitor-interval" : "10s",
+    "format" : "parquet",
+    "streaming-starting-strategy" : "TABLE_SCAN_THEN_INCREMENTAL"
+  },
+  "current-snapshot-id" : 7913502724404465146,
+  "refs" : {
+    "main" : {
+      "snapshot-id" : 7913502724404465146,
+      "type" : "branch"
+    }
+  },
+  "snapshots" : [ {
+    "snapshot-id" : 7913502724404465146,
+    "timestamp-ms" : 1751956778041,
+    "summary" : {
+      "operation" : "append",
+      "flink.operator-id" : "e883208d19e3c34f8aaf2a3168a63337",
+      "flink.job-id" : "a1492b57253e72f746caee8d121558b7",
+      "flink.max-committed-checkpoint-id" : "9223372036854775807",
+      "added-data-files" : "1",
+      "added-records" : "1",
+      "added-files-size" : "780",
+      "changed-partition-count" : "1",
+      "total-records" : "1",
+      "total-files-size" : "780",
+      "total-data-files" : "1",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/opt/warehouse/iceberg_hadoop/user_metadata_v5/metadata/snap-7913502724404465146-1-ab7aace5-b9ce-4a60-b255-f2bb7266a6ce.avro",
+    "schema-id" : 0
+  } ],
+  "statistics" : [ ],
+  "snapshot-log" : [ {
+    "timestamp-ms" : 1751956778041,
+    "snapshot-id" : 7913502724404465146
+  } ],
+  "metadata-log" : [ {
+    "timestamp-ms" : 1751956592958,
+    "metadata-file" : "file:/opt/warehouse/iceberg_hadoop/user_metadata_v5/metadata/v1.metadata.json"
+  } ]
+}
