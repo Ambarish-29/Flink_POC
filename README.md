@@ -1,10 +1,12 @@
 # Flink_POC
-A POC on flink real time streaming with kafka topics and iceberg tables
+**A POC on flink real time streaming with kafka topics and iceberg tables**
 
+## Create Containers
 docker-compose build --no-cache
 docker-compose up -d
 
 
+## Create Kafkgen Connectors
 create this json in kafkagen-connectors folder (name: users_mock_data.json)
 
 {
@@ -22,17 +24,19 @@ create this json in kafkagen-connectors folder (name: users_mock_data.json)
 }
 
 
+### Register Kafkagen connectors
 curl -X DELETE http://localhost:8083/connectors/datagen-json
 cd kafkagen-connectors
 curl -X POST -H "Content-Type: application/json" --data @users_mock_data.json http://localhost:8083/connectors
 curl http://localhost:8083/connectors/datagen-json/status
 
 
+### Start Flink Sql Client
 docker exec -it flink-jobmanager bash
 /opt/flink/bin/sql-client.sh
 
 
-
+### Create Source Table From Kafka Source Topic
 CREATE TABLE user_table_v6 (
   registertime BIGINT,
   userid STRING,
@@ -49,9 +53,11 @@ CREATE TABLE user_table_v6 (
   'json.ignore-parse-errors' = 'true'
 );
 
+**Ensure Table is streaming**
 SELECT * FROM user_table_v6;
 
 
+### Create Transformed View from source table
 CREATE VIEW transformed_users_v6 AS
 SELECT
   userid,
@@ -67,7 +73,7 @@ SELECT
 FROM user_table_v6;
 
 
-
+### Create Sink Table with kafka connector
 CREATE TABLE user_sink_v6 (
   userid STRING,
   regionid STRING,
@@ -82,6 +88,7 @@ CREATE TABLE user_sink_v6 (
 );
 
 
+### create a iceberg catalog
 CREATE CATALOG iceberg_hadoop WITH (
    'type' = 'iceberg',
    'catalog-type' = 'hadoop',
@@ -89,8 +96,11 @@ CREATE CATALOG iceberg_hadoop WITH (
 );
 
 
+**switch to iceberg catalog**
 USE CATALOG iceberg_hadoop;
 
+
+### create iceberg batch table
 CREATE TABLE iceberg_hadoop.user_metadata_v6 (
   userid STRING,
   extra_info STRING
@@ -104,12 +114,15 @@ CREATE TABLE iceberg_hadoop.user_metadata_v6 (
 );
 
 
+### Insert values in iceberg table
 INSERT INTO iceberg_hadoop.user_metadata_v6 VALUES ('User_4', 'Active User');
 
 
+**switch to flink catalog**
 use catalog default_catalog;
 
 
+### Create a view to join transformed flink view and iceberg batch table
 CREATE VIEW enriched_user_info_v6 AS
 SELECT
   t.userid,
@@ -120,15 +133,18 @@ JOIN iceberg_hadoop.iceberg_hadoop.user_metadata_v6 as m
 ON t.userid = m.userid;
 
 
+### Insert the data from final view to sink topic table
 INSERT INTO user_sink_v6
 SELECT * FROM enriched_user_info_v6;
 
 
+### Ensure working by having two console consumers (one for source, one for final output)
 kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
 
 kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
 
 
+# test (not yet completed)
 
 CREATE TABLE kafka_intermediate_table_v6 (
   userid STRING,
