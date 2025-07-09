@@ -25,15 +25,15 @@ create this json in kafkagen-connectors folder (name: users_mock_data.json)
 
 
 ### Register Kafkagen connectors
-curl -X DELETE http://localhost:8083/connectors/datagen-json
-cd kafkagen-connectors
-curl -X POST -H "Content-Type: application/json" --data @users_mock_data.json http://localhost:8083/connectors
-curl http://localhost:8083/connectors/datagen-json/status
+- curl -X DELETE http://localhost:8083/connectors/datagen-json
+- cd kafkagen-connectors
+- curl -X POST -H "Content-Type: application/json" --data @users_mock_data.json http://localhost:8083/connectors
+- curl http://localhost:8083/connectors/datagen-json/status
 
 
 ### Start Flink Sql Client
-docker exec -it flink-jobmanager bash
-/opt/flink/bin/sql-client.sh
+- docker exec -it flink-jobmanager bash
+- /opt/flink/bin/sql-client.sh
 
 
 ### Create Source Table From Kafka Source Topic
@@ -139,9 +139,9 @@ SELECT * FROM enriched_user_info_v6;
 
 
 ### Ensure working by having two console consumers (one for source, one for final output)
-kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
+- kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
 
-kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
+- kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
 
 
 # test (not yet completed)
