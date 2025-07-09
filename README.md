@@ -36,6 +36,7 @@ create this json in kafkagen-connectors folder (name: users_mock_data.json)
 - /opt/flink/bin/sql-client.sh
 
 
+
 ### Create Source Table From Kafka Source Topic
 CREATE TABLE user_table_v6 (
   registertime BIGINT,
@@ -54,7 +55,9 @@ CREATE TABLE user_table_v6 (
 );
 
 **Ensure Table is streaming**
-SELECT * FROM user_table_v6;
+- SELECT * FROM user_table_v6;
+
+
 
 
 ### Create Transformed View from source table
@@ -73,6 +76,7 @@ SELECT
 FROM user_table_v6;
 
 
+
 ### Create Sink Table with kafka connector
 CREATE TABLE user_sink_v6 (
   userid STRING,
@@ -88,6 +92,8 @@ CREATE TABLE user_sink_v6 (
 );
 
 
+
+
 ### create a iceberg catalog
 CREATE CATALOG iceberg_hadoop WITH (
    'type' = 'iceberg',
@@ -97,7 +103,9 @@ CREATE CATALOG iceberg_hadoop WITH (
 
 
 **switch to iceberg catalog**
-USE CATALOG iceberg_hadoop;
+- USE CATALOG iceberg_hadoop;
+
+
 
 
 ### create iceberg batch table
@@ -119,7 +127,9 @@ INSERT INTO iceberg_hadoop.user_metadata_v6 VALUES ('User_4', 'Active User');
 
 
 **switch to flink catalog**
-use catalog default_catalog;
+- use catalog default_catalog;
+
+
 
 
 ### Create a view to join transformed flink view and iceberg batch table
@@ -133,15 +143,23 @@ JOIN iceberg_hadoop.iceberg_hadoop.user_metadata_v6 as m
 ON t.userid = m.userid;
 
 
+
+
+
 ### Insert the data from final view to sink topic table
 INSERT INTO user_sink_v6
 SELECT * FROM enriched_user_info_v6;
+
+
+
 
 
 ### Ensure working by having two console consumers (one for source, one for final output)
 - kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
 
 - kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
+
+
 
 
 # test (not yet completed)
