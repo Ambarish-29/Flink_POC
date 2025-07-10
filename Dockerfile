@@ -11,9 +11,10 @@ ENV HADOOP_VERSION=3.3.6
 ENV ICEBERG_VERSION=1.3.0
 ENV FLINK_VERSION=1.17.1
 ENV KAFKA_VERSION=3.2.3
+ENV FLINK_HIVE_CONNECTOR_VERSION=3.1.2_2.12
 
 
-# Only download and install Hadoop if not already present
+#Only download and install Hadoop if not already present
 RUN if [ ! -d "/opt/hadoop-${HADOOP_VERSION}" ]; then \
       wget https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
       tar -xzf hadoop-${HADOOP_VERSION}.tar.gz -C /opt/ && \
@@ -39,5 +40,9 @@ RUN wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/iceberg
 RUN wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-connector-kafka/${FLINK_VERSION}/flink-connector-kafka-${FLINK_VERSION}.jar  && \
     wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kafka/${FLINK_VERSION}/flink-connector-kafka-${FLINK_VERSION}.jar && \
     wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/${KAFKA_VERSION}/kafka-clients-${KAFKA_VERSION}.jar
+
+
+# Download bundled Hive connector jar (matches Hive 3.1.2 and Flink 1.17.1 with Scala 2.12)
+RUN wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-hive-3.1.2_2.12/1.15.4/flink-sql-connector-hive-3.1.2_2.12-1.15.4.jar
 
 USER flink

@@ -1,250 +1,189 @@
 # Flink_POC
-**A POC on flink real time streaming with kafka topics and iceberg tables**
+**A POC on flink real time streaming with kafka topics and hive tables (support with iceberg also available)**
 
-## Create Containers
+
+## Hive Metastore
+
+A New addition of hive metastore have been added
+A container named hive mestarore will be created
+A postgres service container also will be created which acts as a backend for hive metastore
+Hive mestaore configurations needed to created (which is created in hive-conf/hive-site.xml and mounted to respective conatiners)
+
+
+## Create build & Containers
 - docker-compose build --no-cache
 - docker-compose up -d
 
 
-## Create Kafkgen Connectors
-create this json in kafkagen-connectors folder (name: users_mock_data.json)
-
-{
-  "name": "datagen-json",
-  "config": {
-    "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
-    "kafka.topic": "user_actions_json",
-    "quickstart": "users",
-    "max.interval": 1000,
-    "iterations": -1,
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": false
-  }
-}
-
-
-### Register Kafkagen connectors
-- curl -X DELETE http://localhost:8083/connectors/datagen-json
-- cd kafkagen-connectors
-- curl -X POST -H "Content-Type: application/json" --data @users_mock_data.json http://localhost:8083/connectors
-- curl http://localhost:8083/connectors/datagen-json/status
-
-
 ### Start Flink Sql Client
-- docker exec -it flink-jobmanager bash
-- /opt/flink/bin/sql-client.sh
+docker exec -it flink-jobmanager bash
+/opt/flink/bin/sql-client.sh
 
 
+### Ensure Hive Catalog can be accessed by sql-client
+```sql
+CREATE CATALOG hive_catalog WITH (
+ 'type' = 'hive',
+ 'default-database' = 'default',
+ 'hive-conf-dir' = '/opt/hive-conf',
+ 'hive-version' = '3.1.2'
+);
+show catalogs;
+use catalog hive_catalog;
+create database hive_new;
+show databases;
+```
 
-### Create Source Table From Kafka Source Topic
-CREATE TABLE user_table_v6 (
-  registertime BIGINT,
-  userid STRING,
-  regionid STRING,
-  gender STRING,
-  proc_time as PROCTIME()
+
+### Create Source Table From Kafka Source Topic (added proctime column to support processing time temporal join)
+```sql
+CREATE TABLE if not exists ordersSource_v6 (
+  product_id STRING,
+  user_name string,
+  proctime AS Proctime()
 ) WITH (
   'connector' = 'kafka',
-  'topic' = 'source_topic_v6',
+  'topic' = 'mytopic_new_v6',
   'properties.bootstrap.servers' = 'kafka:9092',
   'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
+  'format' = 'json'
 );
 
 **Ensure Table is streaming**
-- SELECT * FROM user_table_v6;
+SELECT * FROM user_table_v6;
+```
 
 
+### In Another Terminal, Start Spark-sql in spark-hive client container
+
+**Steps**
+
+1. docker exec -it spark-hive-client bash
+2. once inside terminal, perform this cmd to start spark-sql shell with hive catalog: /opt/bitnami/spark/bin/spark-sql --hiveconf hive.metastore.uris=thrift://hive-metastore:9083
+3. ensure its working by using cmd: show databases; (the database hive_new should reflect here)
+4. once ensured, do: use hive_new;
 
 
-### Create Transformed View from source table
-CREATE VIEW transformed_users_v6 AS
-SELECT
-  userid,
-  gender,
-  regionid,
-  TO_TIMESTAMP_LTZ(registertime, 3) AS register_time_ts,
-  proc_time,
-  CASE
-    WHEN gender = 'MALE' THEN 'M'
-    WHEN gender = 'FEMALE' THEN 'F'
-    ELSE 'O'
-  END AS gender_short
-FROM user_table_v6;
+### Create hive batch table
+```sql
+CREATE TABLE if not exists hive_test_table_new_v6 (
+  product_id STRING,
+  product_name STRING,
+  unit_price DECIMAL(10, 4),
+  pv_count BIGINT,
+  like_count BIGINT,
+  comment_count BIGINT,
+  update_time STRING,
+  update_user STRING
+) 
+STORED AS PARQUET 
+LOCATION '/opt/warehouse/hive_new/hive_test_table_new_v6'
+PARTITIONED BY (
+    create_time   STRING
+);
+```
 
 
+### Insert hive batch table
+
+Before Inserting, we need to provide permission for the path we have created with the table
+For that, Open a separate spark-sql-hive-client by: docker exec -u root -it spark-hive-client bash
+In that new terminal, give permission by: chmod 777 -R /opt/warehouse/hive_new/
+Now Switch back to old spark terminal, and do
+
+```sql
+INSERT INTO hive_test_table_new_v6 PARTITION (create_time='create_time_1') VALUES ('product_id_11', 'product_name_11', 1.2345, 100, 50, 20, '2023-11-25 02:10:58', 'update_user_1');
+```
 
 ### Create Sink Table with kafka connector
-CREATE TABLE user_sink_v6 (
-  userid STRING,
-  regionid STRING,
-  extra_info STRING
+
+Now go to flink sql terminal and,
+
+```sql
+CREATE TABLE print_kafka_v6 (
+  product_id STRING,
+  user_name STRING,
+  product_name STRING,
+  unit_price DECIMAL(10, 4),
+  pv_count BIGINT,
+  like_count BIGINT,
+  comment_count BIGINT,
+  update_time STRING,
+  update_user STRING,
+  create_time STRING
 ) WITH (
   'connector' = 'kafka',
-  'topic' = 'user_transformed_v6',
+  'topic' = 'mytopic_sink_v6',
   'properties.bootstrap.servers' = 'kafka:9092',
   'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
+  'scan.startup.mode' = 'earliest-offset'
 );
+``` 
 
 
 
 
-### create a iceberg catalog
-CREATE CATALOG iceberg_hadoop WITH (
-   'type' = 'iceberg',
-   'catalog-type' = 'hadoop',
-  'warehouse' = 'file:///opt/warehouse'
-);
+### Insert into sink table
+```sql
+insert into print_kafka_v6
+select
+  orders.product_id,
+  orders.user_name,
+  dim.product_name,
+  dim.unit_price,
+  dim.pv_count,
+  dim.like_count,
+  dim.comment_count,
+  dim.update_time,
+  dim.update_user,
+  dim.create_time
+from ordersSource_v6 orders
+join hive_test_table_new_v6 /*+ OPTIONS('streaming-source.enable'='true',
+   'streaming-source.partition.include' = 'latest', 'streaming-source.monitor-interval' = '15 s') */     
+   for system_time as of orders.proctime as dim on orders.product_id = dim.product_id;
+```
+
+## Testing The Theory
+
+### Create a source topic producer
+
+Open a new terminal and start producing to the source topic
+
+/usr/bin/kafka-console-producer --bootstrap-server localhost:9092 --topic mytopic_new_v6
+
+produce this record:
+
+{"product_id": "product_id_11", "user_name": "nametest"}
 
 
-**switch to iceberg catalog**
-- USE CATALOG iceberg_hadoop;
+### Create a console consumer for source topic
+
+/usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic mytopic_new_v6 --from-beginning
+
+### Create a console consumer for sink topic (which is already streaming by the job)
+
+/usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic mytopic_sink_v6 --from-beginning
+
+The record we put, should join here and should be received by the sink consumer.
 
 
+### Test latest partition theory
 
+produce a new message to source topic:  {"product_id": "product_id_12", "user_name": "nametest"}
 
-### create iceberg batch table
-CREATE TABLE iceberg_hadoop.user_metadata_v6 (
-  userid STRING,
-  extra_info STRING
-) WITH (
-  'connector' = 'filesystem',
-  'path' = 'file:///opt/warehouse/user_metadata_v6',
-  'format' = 'parquet',
-  'streaming' = 'true',
-  'monitor-interval' = '10s',
-  'streaming-starting-strategy' = 'TABLE_SCAN_THEN_INCREMENTAL'
-);
+Now go back to spark-sql-client terminal and do
 
+```sql
+INSERT INTO hive_test_table_new_v6 PARTITION (create_time='create_time_2') VALUES ('product_id_12', 'product_name_12', 1.2345, 100, 50, 20, '2023-11-25 02:10:58', 'update_user_1');
+```
 
-### Insert values in iceberg table
-INSERT INTO iceberg_hadoop.user_metadata_v6 VALUES ('User_4', 'Active User');
+now come back to sink topic consumer, the record with product_id_12 we produced before should not reflect here.
 
+now again produce these messages to source topic,
 
-**switch to flink catalog**
-- use catalog default_catalog;
+{"product_id": "product_id_12", "user_name": "namee2"}
+{"product_id": "product_id_11", "user_name": "namee1"}
 
+now in sink, only 12 should reflect and not 11
 
-
-
-### Create a view to join transformed flink view and iceberg batch table
-CREATE VIEW enriched_user_info_v6 AS
-SELECT
-  t.userid,
-  t.regionid,
-  m.extra_info
-FROM transformed_users_v6 as t
-JOIN iceberg_hadoop.iceberg_hadoop.user_metadata_v6 as m
-ON t.userid = m.userid;
-
-
-
-
-
-### Insert the data from final view to sink topic table
-INSERT INTO user_sink_v6
-SELECT * FROM enriched_user_info_v6;
-
-
-
-
-
-### Ensure working by having two console consumers (one for source, one for final output)
-- kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
-
-- kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
-
-
-
-
-# test (not yet completed)
-
-CREATE TABLE kafka_intermediate_table_v6 (
-  userid STRING,
-  regionid STRING,
-  extra_info STRING
-) WITH (
-  'connector' = 'kafka',
-  'topic' = 'user_transformed_v6',
-  'properties.bootstrap.servers' = 'kafka:9092',
-  'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
-);
-
-
-
-
-
-
-
-
-
-CREATE TABLE user_transformed_sink (
->   userid STRING,
->   gender STRING,
->   regionid STRING,
->   register_time_ts TIMESTAMP_LTZ(3),
->   gender_short STRING
-> )
-> PARTITIONED BY (regionid);
-
-
-USE CATALOG default_catalog;
-
-
-CREATE TABLE kafka_user_transformed (
-  userid STRING,
-  gender STRING,
-  regionid STRING,
-  register_time_ts TIMESTAMP_LTZ(3),
-  gender_short STRING,
-  proc_time TIMESTAMP_LTZ(3),
-  WATERMARK FOR proc_time AS proc_time - INTERVAL '5' SECOND
-) WITH (
-  'connector' = 'kafka',
-  'topic' = 'user_transformed_new',
-  'properties.bootstrap.servers' = 'kafka:9092',
-  'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
-);
-
-select * from kafka_user_transformed;
-
-
-SET execution.checkpointing.interval = '5 min';
-
-USE CATALOG iceberg_hadoop;
-
-
-CREATE TABLE iceberg_hadoop.user_transformed_sink (
-  userid STRING,
-  gender STRING,
-  regionid STRING,
-  register_time_ts TIMESTAMP_LTZ(3),
-  gender_short STRING,
-  window_start TIMESTAMP_LTZ(3)  -- new column for window start time
-) WITH (
-  'format-version' = '2',
-  'write.format.default' = 'parquet',
-  'warehouse' = 'file:///opt/warehouse/user_transformed_sink'
-);
-
-
-INSERT INTO iceberg_hadoop.user_transformed_sink
-> SELECT
->   userid,
->   gender,
->   regionid,
->   register_time_ts,
->   gender_short,
->   CAST(NULL AS TIMESTAMP_LTZ(3)) AS window_start  -- since your Iceberg table has this column, set it NULL for now
-> FROM default_catalog.default_database.kafka_user_transformed;
+This is happening because the latest partition is fetched from hive table, and based on processing time join is happening

@@ -12,6 +12,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - flinknetwork
 
 
   kafka:
@@ -28,6 +30,8 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - flinknetwork
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.4.0
@@ -40,6 +44,8 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8084
+    networks:
+      - flinknetwork
 
   connect:
     image: cnfldemos/kafka-connect-datagen:0.4.0-6.1.0
@@ -66,6 +72,8 @@ services:
       CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8084
       CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+    networks:
+      - flinknetwork
       
   jobmanager:
     build:
@@ -80,8 +88,11 @@ services:
     volumes:
       - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
       - ./iceberg-warehouse:/opt/warehouse
+      - ./hive-conf:/opt/hive-conf
     depends_on:
       - kafka
+    networks:
+      - flinknetwork
 
   taskmanager:
     build:
@@ -96,3 +107,60 @@ services:
     volumes:
       - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
       - ./iceberg-warehouse:/opt/warehouse
+      - ./hive-conf:/opt/hive-conf
+    networks:
+      - flinknetwork
+
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: metastore
+      POSTGRES_USER: hive
+      POSTGRES_PASSWORD: hive
+    ports:
+      - "5432:5432"
+    networks:
+      - flinknetwork
+
+
+  hive-metastore:
+    image: apache/hive:3.1.3
+    container_name: hive-metastore
+    depends_on:
+      - postgres
+    ports:
+      - "9083:9083"
+    environment:
+      SERVICE_NAME: metastore
+      HIVE_METASTORE_DB_TYPE: postgres
+    volumes:
+      - ./iceberg-warehouse:/opt/warehouse
+      - ./hive-conf:/opt/hive-conf
+    networks:
+      - flinknetwork
+
+  
+  spark-hive-client:
+    image: bitnami/spark:3.3.2
+    container_name: spark-hive-client
+    depends_on:
+      - hive-metastore
+    command: tail -f /dev/null
+    volumes:
+      - ./hive-conf:/opt/hive-conf
+      - ./iceberg-warehouse:/opt/warehouse
+      - ./hive-conf/hive-site.xml:/opt/bitnami/spark/conf/hive-site.xml
+    environment:
+      - SPARK_EXTRA_CLASSPATH=/opt/hive-conf
+      - HOME=/tmp
+    networks:
+      - flinknetwork
+
+
+
+networks:
+  flinknetwork:
+    name: flinknetwork

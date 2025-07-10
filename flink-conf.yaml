@@ -146,6 +146,7 @@ execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATIO
 # execution.checkpointing.max-concurrent-checkpoints: 1
 # execution.checkpointing.min-pause: 0
 execution.checkpointing.mode: EXACTLY_ONCE
+table.dynamic-table-options.enabled: true
 # execution.checkpointing.timeout: 10min
 # execution.checkpointing.tolerable-failed-checkpoints: 0
 # execution.checkpointing.unaligned: false
