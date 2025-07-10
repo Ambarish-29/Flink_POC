@@ -57,10 +57,10 @@ SELECT * FROM user_table_v6;
 
 **Steps**
 
-1. ```bash
+```bash
 docker exec -it spark-hive-client
 ```
-2. once inside terminal, perform this cmd to start spark-sql shell with hive catalog: /opt/bitnami/spark/bin/spark-sql --hiveconf hive.metastore.uris=thrift://hive-metastore:9083
+2. once inside terminal, perform this cmd to start spark-sql shell with hive catalog: ```bash /opt/bitnami/spark/bin/spark-sql --hiveconf hive.metastore.uris=thrift://hive-metastore:9083```
 3. ensure its working by using cmd: show databases; (the database hive_new should reflect here)
 4. once ensured, do: use hive_new;
 
