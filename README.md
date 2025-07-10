@@ -4,10 +4,10 @@
 
 ## Hive Metastore
 
-A New addition of hive metastore have been added
-A container named hive mestarore will be created
-A postgres service container also will be created which acts as a backend for hive metastore
-Hive mestaore configurations needed to created (which is created in hive-conf/hive-site.xml and mounted to respective conatiners)
+- A New addition of hive metastore have been added
+- A container named hive mestarore will be created
+- A postgres service container also will be created which acts as a backend for hive metastore
+- Hive mestaore configurations needed to created (which is created in hive-conf/hive-site.xml and mounted to respective conatiners)
 
 
 ## Create build & Containers
@@ -86,10 +86,16 @@ PARTITIONED BY (
 
 ### Insert hive batch table
 
-Before Inserting, we need to provide permission for the path we have created with the table
-For that, Open a separate spark-sql-hive-client by: docker exec -u root -it spark-hive-client bash
-In that new terminal, give permission by: chmod 777 -R /opt/warehouse/hive_new/
-Now Switch back to old spark terminal, and do
+1. Before Inserting, we need to provide permission for the path we have created with the table
+2. For that, Open a separate spark-sql-hive-client by
+```bash
+docker exec -u root -it spark-hive-client bash
+```
+3. In that new terminal, give permission by
+```bash
+chmod 777 -R /opt/warehouse/hive_new/
+```
+4. Now Switch back to old spark terminal, and do
 
 ```sql
 INSERT INTO hive_test_table_new_v6 PARTITION (create_time='create_time_1') VALUES ('product_id_11', 'product_name_11', 1.2345, 100, 50, 20, '2023-11-25 02:10:58', 'update_user_1');
@@ -147,29 +153,40 @@ join hive_test_table_new_v6 /*+ OPTIONS('streaming-source.enable'='true',
 
 ### Create a source topic producer
 
-Open a new terminal and start producing to the source topic
+- Open a new terminal and start producing to the source topic
 
+```bash 
 /usr/bin/kafka-console-producer --bootstrap-server localhost:9092 --topic mytopic_new_v6
+```
 
 produce this record:
 
+```bash
 {"product_id": "product_id_11", "user_name": "nametest"}
-
+```
 
 ### Create a console consumer for source topic
 
+```bash
 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic mytopic_new_v6 --from-beginning
+```
 
 ### Create a console consumer for sink topic (which is already streaming by the job)
 
+```bash
 /usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic mytopic_sink_v6 --from-beginning
+```
 
 The record we put, should join here and should be received by the sink consumer.
 
 
 ### Test latest partition theory
 
-produce a new message to source topic:  {"product_id": "product_id_12", "user_name": "nametest"}
+produce a new message to source topic
+
+```bash
+{"product_id": "product_id_12", "user_name": "nametest"}
+```
 
 Now go back to spark-sql-client terminal and do
 
@@ -181,8 +198,10 @@ now come back to sink topic consumer, the record with product_id_12 we produced 
 
 now again produce these messages to source topic,
 
+```bash
 {"product_id": "product_id_12", "user_name": "namee2"}
 {"product_id": "product_id_11", "user_name": "namee1"}
+```
 
 now in sink, only 12 should reflect and not 11
 
