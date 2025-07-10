@@ -16,8 +16,13 @@
 
 
 ### Start Flink Sql Client
+```bash
 docker exec -it flink-jobmanager bash
-/opt/flink/bin/sql-client.sh
+```
+
+```bash
+/opt/flink/bin/sql-client.sh -i sql-client-intialization.sql
+```
 
 
 ### Ensure Hive Catalog can be accessed by sql-client
