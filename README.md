@@ -22,14 +22,8 @@ docker exec -it flink-jobmanager bash
 
 ### Ensure Hive Catalog can be accessed by sql-client
 ```sql
-CREATE CATALOG hive_catalog WITH (
- 'type' = 'hive',
- 'default-database' = 'default',
- 'hive-conf-dir' = '/opt/hive-conf',
- 'hive-version' = '3.1.2'
-);
 show catalogs;
-use catalog hive_catalog;
+show current catalog;
 create database hive_new;
 show databases;
 ```
