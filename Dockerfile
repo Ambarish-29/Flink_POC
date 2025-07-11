@@ -38,6 +38,11 @@ RUN wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/iceberg
 # Download Flink Kafka Connector JARs
 RUN wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-connector-kafka/${FLINK_VERSION}/flink-connector-kafka-${FLINK_VERSION}.jar  && \
     wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kafka/${FLINK_VERSION}/flink-connector-kafka-${FLINK_VERSION}.jar && \
-    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/${KAFKA_VERSION}/kafka-clients-${KAFKA_VERSION}.jar
+    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/${KAFKA_VERSION}/kafka-clients-${KAFKA_VERSION}.jar && \
+    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-sql-avro-confluent-registry/1.17.1/flink-sql-avro-confluent-registry-1.17.1.jar && \
+    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-avro/1.17.1/flink-avro-1.17.1.jar && \
+    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/flink/flink-avro-confluent-registry/1.17.1/flink-avro-confluent-registry-1.17.1.jar && \
+    wget -nc -P /opt/flink/lib https://repo1.maven.org/maven2/org/apache/avro/avro/1.11.1/avro-1.11.1.jar && \
+    wget -nc -P /opt/flink/lib https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-client/7.4.0/kafka-schema-registry-client-7.4.0.jar
 
 USER flink
