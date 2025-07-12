@@ -1,34 +1,23 @@
 # Flink_POC
-**A POC on flink real time streaming with kafka topics and iceberg tables**
+**A POC on flink real time streaming with kafka topics, schema registry and iceberg table**
 
 ## Create Containers
 - docker-compose build --no-cache
 - docker-compose up -d
 
 
-## Create Kafkgen Connectors
-create this json in kafkagen-connectors folder (name: users_mock_data.json)
+## Execute the Python script to produce the data as per the defined schema
+python avro_producer.py
 
-{
-  "name": "datagen-json",
-  "config": {
-    "connector.class": "io.confluent.kafka.connect.datagen.DatagenConnector",
-    "kafka.topic": "user_actions_json",
-    "quickstart": "users",
-    "max.interval": 1000,
-    "iterations": -1,
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-    "value.converter.schemas.enable": false
-  }
-}
+## Verify the schema registry by using UI or CLI
 
+Schema Registry URL: http://localhost:8000/
 
-### Register Kafkagen connectors
-- curl -X DELETE http://localhost:8083/connectors/datagen-json
-- cd kafkagen-connectors
-- curl -X POST -H "Content-Type: application/json" --data @users_mock_data.json http://localhost:8083/connectors
-- curl http://localhost:8083/connectors/datagen-json/status
+CLI:
+curl http://localhost:8084/subjects
+curl http://localhost:8084/subjects/source_topic-value/versions/latest
+curl http://localhost:8084/subjects/source_topic-value/versions
+curl http://localhost:8084/schemas/ids/1
 
 
 ### Start Flink Sql Client
@@ -36,62 +25,60 @@ create this json in kafkagen-connectors folder (name: users_mock_data.json)
 - /opt/flink/bin/sql-client.sh
 
 
-
 ### Create Source Table From Kafka Source Topic
-CREATE TABLE user_table_v6 (
-  registertime BIGINT,
-  userid STRING,
-  regionid STRING,
-  gender STRING,
+CREATE TABLE user_table (
+  id BIGINT,
+  username STRING,
+  email STRING,
+  country STRING,
+  created_time STRING,
   proc_time as PROCTIME()
 ) WITH (
   'connector' = 'kafka',
-  'topic' = 'source_topic_v6',
+  'topic' = 'source_topic',
   'properties.bootstrap.servers' = 'kafka:9092',
   'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
+  'format' = 'avro-confluent',
+  'avro-confluent.schema-registry.url' = 'http://schema-registry:8084'
 );
 
 **Ensure Table is streaming**
-- SELECT * FROM user_table_v6;
-
-
+- SELECT * FROM user_table;
 
 
 ### Create Transformed View from source table
-CREATE VIEW transformed_users_v6 AS
-SELECT
-  userid,
-  gender,
-  regionid,
-  TO_TIMESTAMP_LTZ(registertime, 3) AS register_time_ts,
-  proc_time,
-  CASE
-    WHEN gender = 'MALE' THEN 'M'
-    WHEN gender = 'FEMALE' THEN 'F'
-    ELSE 'O'
-  END AS gender_short
-FROM user_table_v6;
 
+CREATE VIEW transformed_users AS
+SELECT
+  id,
+  CASE
+WHEN id % 2 = 0 THEN 'even_id' ELSE 'odd_id' END AS id_check,
+  username,
+  email,
+  country,
+  CAST(TO_TIMESTAMP(created_time) AS TIMESTAMP_LTZ(3)) AS register_time_ts,
+  CURRENT_TIMESTAMP AS event_vw_ts,
+  proc_time
+FROM user_table;
 
 
 ### Create Sink Table with kafka connector
-CREATE TABLE user_sink_v6 (
-  userid STRING,
-  regionid STRING,
-  extra_info STRING
+CREATE TABLE user_sink (
+  id BIGINT,
+  id_check STRING,
+  username STRING,
+  city STRING,
+  country STRING,
+  register_time_ts TIMESTAMP(3),
+  event_vw_ts TIMESTAMP(3)
 ) WITH (
   'connector' = 'kafka',
-  'topic' = 'user_transformed_v6',
+  'topic' = 'user_transformed',
   'properties.bootstrap.servers' = 'kafka:9092',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
+  'properties.group.id' = 'user_sink_group',
+  'format' = 'avro-confluent',
+  'avro-confluent.schema-registry.url' = 'http://schema-registry:8084'
 );
-
-
 
 
 ### create a iceberg catalog
@@ -106,15 +93,13 @@ CREATE CATALOG iceberg_hadoop WITH (
 - USE CATALOG iceberg_hadoop;
 
 
-
-
 ### create iceberg batch table
-CREATE TABLE iceberg_hadoop.user_metadata_v6 (
-  userid STRING,
-  extra_info STRING
+CREATE TABLE iceberg_hadoop.user_batch_data (
+  country STRING,
+  city STRING
 ) WITH (
   'connector' = 'filesystem',
-  'path' = 'file:///opt/warehouse/user_metadata_v6',
+  'path' = 'file:///opt/warehouse/user_batch_data',
   'format' = 'parquet',
   'streaming' = 'true',
   'monitor-interval' = '10s',
@@ -123,128 +108,44 @@ CREATE TABLE iceberg_hadoop.user_metadata_v6 (
 
 
 ### Insert values in iceberg table
-INSERT INTO iceberg_hadoop.user_metadata_v6 VALUES ('User_4', 'Active User');
+INSERT INTO iceberg_hadoop.user_batch_data VALUES ('India', 'Chennai');
 
 
 **switch to flink catalog**
 - use catalog default_catalog;
 
 
-
-
 ### Create a view to join transformed flink view and iceberg batch table
-CREATE VIEW enriched_user_info_v6 AS
+CREATE VIEW enriched_user_info AS
 SELECT
-  t.userid,
-  t.regionid,
-  m.extra_info
-FROM transformed_users_v6 as t
-JOIN iceberg_hadoop.iceberg_hadoop.user_metadata_v6 as m
-ON t.userid = m.userid;
-
-
-
+  a.id,
+  a.id_check,
+  a.username,
+  b.city,
+  a.country,
+  a.register_time_ts,
+  a.event_vw_ts
+FROM transformed_users as a
+JOIN iceberg_hadoop.iceberg_hadoop.user_batch_data as b
+ON a.country = b.country;
 
 
 ### Insert the data from final view to sink topic table
-INSERT INTO user_sink_v6
-SELECT * FROM enriched_user_info_v6;
-
-
-
+INSERT INTO user_sink
+SELECT * FROM enriched_user_info;
 
 
 ### Ensure working by having two console consumers (one for source, one for final output)
-- kafka-console-consumer --bootstrap-server kafka:9092 --topic source_topic_v6 --from-beginning
+docker exec -it connect
 
-- kafka-console-consumer --bootstrap-server kafka:9092 --topic user_transformed_v6 --from-beginning
+kafka-avro-console-consumer \
+  --bootstrap-server kafka:9092 \
+  --topic source_topic \
+  --from-beginning \
+  --property schema.registry.url=http://schema-registry:8084
 
-
-
-
-# test (not yet completed)
-
-CREATE TABLE kafka_intermediate_table_v6 (
-  userid STRING,
-  regionid STRING,
-  extra_info STRING
-) WITH (
-  'connector' = 'kafka',
-  'topic' = 'user_transformed_v6',
-  'properties.bootstrap.servers' = 'kafka:9092',
-  'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
-);
-
-
-
-
-
-
-
-
-
-CREATE TABLE user_transformed_sink (
->   userid STRING,
->   gender STRING,
->   regionid STRING,
->   register_time_ts TIMESTAMP_LTZ(3),
->   gender_short STRING
-> )
-> PARTITIONED BY (regionid);
-
-
-USE CATALOG default_catalog;
-
-
-CREATE TABLE kafka_user_transformed (
-  userid STRING,
-  gender STRING,
-  regionid STRING,
-  register_time_ts TIMESTAMP_LTZ(3),
-  gender_short STRING,
-  proc_time TIMESTAMP_LTZ(3),
-  WATERMARK FOR proc_time AS proc_time - INTERVAL '5' SECOND
-) WITH (
-  'connector' = 'kafka',
-  'topic' = 'user_transformed_new',
-  'properties.bootstrap.servers' = 'kafka:9092',
-  'scan.startup.mode' = 'earliest-offset',
-  'format' = 'json',
-  'json.fail-on-missing-field' = 'false',
-  'json.ignore-parse-errors' = 'true'
-);
-
-select * from kafka_user_transformed;
-
-
-SET execution.checkpointing.interval = '5 min';
-
-USE CATALOG iceberg_hadoop;
-
-
-CREATE TABLE iceberg_hadoop.user_transformed_sink (
-  userid STRING,
-  gender STRING,
-  regionid STRING,
-  register_time_ts TIMESTAMP_LTZ(3),
-  gender_short STRING,
-  window_start TIMESTAMP_LTZ(3)  -- new column for window start time
-) WITH (
-  'format-version' = '2',
-  'write.format.default' = 'parquet',
-  'warehouse' = 'file:///opt/warehouse/user_transformed_sink'
-);
-
-
-INSERT INTO iceberg_hadoop.user_transformed_sink
-> SELECT
->   userid,
->   gender,
->   regionid,
->   register_time_ts,
->   gender_short,
->   CAST(NULL AS TIMESTAMP_LTZ(3)) AS window_start  -- since your Iceberg table has this column, set it NULL for now
-> FROM default_catalog.default_database.kafka_user_transformed;
+kafka-avro-console-consumer \
+  --bootstrap-server kafka:9092 \
+  --topic user_transformed \
+  --from-beginning \
+  --property schema.registry.url=http://schema-registry:8084

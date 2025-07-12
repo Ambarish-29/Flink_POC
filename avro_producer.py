@@ -1,20 +1,21 @@
 from confluent_kafka import avro
 from confluent_kafka.avro import AvroProducer
 from faker import Faker
-import datetime
+from datetime import datetime, timezone
+import random
 import time
 
 # Initialize Faker
 faker = Faker()
 
 # Kafka and Schema Registry configs
-topic = 'source_topic_v7'
+topic = 'source_topic'
 
 # Load Avro schema
 value_schema = avro.load('./schemas/user_event.avsc')
 
 producer_config = {
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:29092',
     'schema.registry.url': 'http://localhost:8084',
     'security.protocol': 'PLAINTEXT'
 }
@@ -27,6 +28,8 @@ producer = AvroProducer(
 
 event_id = 1
 
+allowed_countries = ["USA", "India", "Germany", "UAE"]
+
 try:
     while True:
         # Generate fake data
@@ -34,8 +37,8 @@ try:
             "id": event_id,
             "username": faker.user_name(),
             "email": faker.email(),
-            "country": faker.country(),
-            "created_time": datetime.datetime.utcnow().isoformat()
+            "country": random.choice(["USA", "India", "Germany", "UAE"]),
+            "created_time": datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S.%f')
         }
 
         # Produce to Kafka
@@ -46,5 +49,6 @@ try:
         event_id += 1
 
         time.sleep(5)  # wait 2 seconds
+        
 except KeyboardInterrupt:
     print("\nStopped.")
