@@ -1,98 +1,251 @@
-# -----------------------------
-# docker-compose.yml (Flink + Iceberg Setup)
-# -----------------------------
-version: '3.8'
+version: "3.5"
 
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     container_name: zookeeper
     ports:
-      - "2181:2181"
+      - "2181"
+    networks:
+      - kafkanet
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/tmp/zookeeper_server_jaas.conf -Dquorum.auth.enableSasl=true -Dquorum.cnxn.threads.size=20 -Dzookeeper.authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider -DjaasLoginRenew=3600000 -DrequireClientAuthScheme=sasl"
 
+    volumes:
+      - zookeeper_data_new:/var/lib/zookeeper/data
+      - ./zookeeper_jaas.conf:/tmp/zookeeper_server_jaas.conf
 
-  kafka:
+    #command: ["sleep", "3600"]
+
+  kafka-0:
     image: confluentinc/cp-kafka:7.4.0
-    container_name: kafka
+    container_name: kafka-0
+    expose:
+      - 9092
+      - 9093
+      - 29092
+    ports:
+      - "29092:29092"
+    networks:
+      - kafkanet
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,SSL:SASL_SSL,EXTERNAL:SSL
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,SSL://0.0.0.0:9093,EXTERNAL://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-0:9092,SSL://kafka-0:9093,EXTERNAL://localhost:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+
+      # SSL configs
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_KEYSTORE_PASSWORD: supersecret
+      KAFKA_SSL_KEY_PASSWORD: supersecret
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: supersecret
+      KAFKA_SSL_CLIENT_AUTH: required
+
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: key_creds
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: truststore_creds
+
+      # SASL configs
+      KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
+      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: PLAIN
+
+      KAFKA_LISTENER_NAME_SSL_SASL_ENABLED_MECHANISMS: PLAIN
+
+
+      # JAAS config file path
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/kafka_server_jaas.conf"
+
+    volumes:
+      - kafka_0_data_new:/var/lib/kafka/data
+      - ./keystore/kafka-0.server.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks:ro
+      - ./keystore/kafka.client.keystore.jks:/etc/kafka/secrets/kafka.client.keystore.jks:ro
+      - ./truststore/kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks:ro
+      - ./secrets/key_creds:/etc/kafka/secrets/key_creds:ro
+      - ./secrets/keystore_creds:/etc/kafka/secrets/keystore_creds:ro
+      - ./secrets/truststore_creds:/etc/kafka/secrets/truststore_creds:ro
+      - ./client.properties:/etc/kafka/secrets/client.properties:ro
+      - ./kafka_server_jaas.conf:/etc/kafka/kafka_server_jaas.conf
     depends_on:
       - zookeeper
+
+    #command: ["sleep", "3600"]
+    
+  kafka-1:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka-1
+    expose:
+      - 9092
+      - 9093
+      - 29093
     ports:
-      - "9092:9092"
+      - "29093:29093"
+    networks:
+      - kafkanet
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  schema-registry:
-    image: confluentinc/cp-schema-registry:7.4.0
-    container_name: schema-registry
-    depends_on:
-      - kafka
-    ports:
-      - "8084:8084"
-    environment:
-      SCHEMA_REGISTRY_HOST_NAME: schema-registry
-      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
-      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8084
+      # Protocol mappings consistent with kafka-0
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,SSL:SASL_SSL,EXTERNAL:SSL
 
-  connect:
-    image: cnfldemos/kafka-connect-datagen:0.4.0-6.1.0
-    container_name: connect
-    depends_on:
-      - kafka
-      - schema-registry
-    ports:
-      - "8083:8083"
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,SSL://0.0.0.0:9093,EXTERNAL://0.0.0.0:29093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-1:9092,SSL://kafka-1:9093,EXTERNAL://localhost:29093
+
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+
+      # SSL configs same as kafka-0
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_KEYSTORE_PASSWORD: supersecret
+      KAFKA_SSL_KEY_PASSWORD: supersecret
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: supersecret
+      KAFKA_SSL_CLIENT_AUTH: required
+
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: key_creds
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: truststore_creds
+
+      # SASL configs
+      KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
+      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: PLAIN
+
+      KAFKA_LISTENER_NAME_SSL_SASL_ENABLED_MECHANISMS: PLAIN
+
+      # JAAS config path
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/kafka_server_jaas.conf"
+
     volumes:
-      - ./schemas:/schemas
+      - kafka_1_data_new:/var/lib/kafka/data
+      - ./keystore/kafka-1.server.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks:ro
+      - ./keystore/kafka.client.keystore.jks:/etc/kafka/secrets/kafka.client.keystore.jks:ro
+      - ./truststore/kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks:ro
+      - ./secrets/key_creds:/etc/kafka/secrets/key_creds:ro
+      - ./secrets/keystore_creds:/etc/kafka/secrets/keystore_creds:ro
+      - ./secrets/truststore_creds:/etc/kafka/secrets/truststore_creds:ro
+      - ./client.properties:/etc/kafka/secrets/client.properties:ro
+      - ./kafka_server_jaas.conf:/etc/kafka/kafka_server_jaas.conf
+    depends_on:
+      - zookeeper
+
+  kafka-2:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka-2
+    expose:
+      - 9092
+      - 9093
+      - 29094
+    ports:
+      - "29094:29094"
+    networks:
+      - kafkanet
     environment:
-      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
-      CONNECT_REST_ADVERTISED_HOST_NAME: connect
-      CONNECT_REST_PORT: 8083
-      CONNECT_GROUP_ID: compose-connect-group
-      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
-      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
-      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
-      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
-      CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
-      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8084
-      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
-      
-  jobmanager:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+      # Protocol mappings consistent with kafka-0
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,SSL:SASL_SSL,EXTERNAL:SSL
+
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,SSL://0.0.0.0:9093,EXTERNAL://0.0.0.0:29094
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka-2:9092,SSL://kafka-2:9093,EXTERNAL://localhost:29094
+
+      KAFKA_INTER_BROKER_LISTENER_NAME: SSL
+
+      # SSL configs same as kafka-0
+      KAFKA_SSL_KEYSTORE_FILENAME: kafka.keystore.jks
+      KAFKA_SSL_KEYSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_KEYSTORE_PASSWORD: supersecret
+      KAFKA_SSL_KEY_PASSWORD: supersecret
+      KAFKA_SSL_TRUSTSTORE_FILENAME: kafka.truststore.jks
+      KAFKA_SSL_TRUSTSTORE_LOCATION: /etc/kafka/secrets
+      KAFKA_SSL_TRUSTSTORE_PASSWORD: supersecret
+      KAFKA_SSL_CLIENT_AUTH: required
+
+      KAFKA_SSL_KEYSTORE_CREDENTIALS: keystore_creds
+      KAFKA_SSL_KEY_CREDENTIALS: key_creds
+      KAFKA_SSL_TRUSTSTORE_CREDENTIALS: truststore_creds
+
+      # SASL configs
+      KAFKA_SASL_ENABLED_MECHANISMS: PLAIN
+      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: PLAIN
+
+      KAFKA_LISTENER_NAME_SSL_SASL_ENABLED_MECHANISMS: PLAIN
+
+      # JAAS config path
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/kafka_server_jaas.conf"
+
+    volumes:
+      - kafka_2_data_new:/var/lib/kafka/data
+      - ./keystore/kafka-2.server.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks:ro
+      - ./keystore/kafka.client.keystore.jks:/etc/kafka/secrets/kafka.client.keystore.jks:ro
+      - ./truststore/kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks:ro
+      - ./secrets/key_creds:/etc/kafka/secrets/key_creds:ro
+      - ./secrets/keystore_creds:/etc/kafka/secrets/keystore_creds:ro
+      - ./secrets/truststore_creds:/etc/kafka/secrets/truststore_creds:ro
+      - ./client.properties:/etc/kafka/secrets/client.properties:ro
+      - ./kafka_server_jaas.conf:/etc/kafka/kafka_server_jaas.conf
+    depends_on:
+      - zookeeper
+
+
+  springboot:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: flink-jobmanager
+    image: whatsapp-kafka-app
+    depends_on:
+      - kafka-0
     ports:
-      - "8081:8081"
-    command: jobmanager
-    environment:
-      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+      - "9003:9003"
     volumes:
-      - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
-      - ./iceberg-warehouse:/opt/warehouse
-    depends_on:
-      - kafka
+      - D:/Ambarish/learning/springboot/wtapp/whatsapp-kafka/cert:/etc/kafka/secrets/
+    networks:
+      - kafkanet
 
-  taskmanager:
+  flask:
     build:
-      context: .
+      context: ./flask_app
       dockerfile: Dockerfile
-    container_name: flink-taskmanager
-    depends_on:
-      - jobmanager
-    command: taskmanager
+    container_name: flask
+    ports:
+      - "5000:5000"
+    networks:
+      - kafkanet
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
     environment:
-      - JOB_MANAGER_RPC_ADDRESS=jobmanager
-    volumes:
-      - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
-      - ./iceberg-warehouse:/opt/warehouse
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    networks:
+      - kafkanet
+
+
+networks:
+  kafkanet:
+    name: kafka-network
+
+volumes:
+  zookeeper_data_new:
+    driver: local
+    name: zookeeper_data_new
+  kafka_0_data_new:
+    driver: local
+    name: kafka_0_data_new
+  kafka_1_data_new:
+    driver: local
+    name: kafka_1_data_new
+  kafka_2_data_new:
+    driver: local
+    name: kafka_2_data_new
