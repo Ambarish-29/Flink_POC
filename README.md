@@ -93,3 +93,32 @@ Since springboot client wants to connect with kafka, we need to explicitely ment
 
 
 
+# Microservice Production Details
+
+We have seen the sasl and ssl above, some other configs mentioned are
+
+generate encrytion
+mvn jasypt:encrypt-value "-Djasypt.encryptor.password=letsok" "-Djasypt.plugin.value=YourStrong!Passw0rd"
+
+use that in your application.yml with following properties
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+
+and pass passwords for decrytion while running the jar from docker compose
+
+example:
+
+compose:
+
+environment:
+  JASYPT_ENCRYPTOR_PASSWORD: letsok
+
+dockerfile:
+
+ENTRYPOINT ["sh", "-c", "echo JasyptPassword=$JASYPT_ENCRYPTOR_PASSWORD && java -Djasypt.encryptor.password=$JASYPT_ENCRYPTOR_PASSWORD -Djasypt.encryptor.algorithm=PBEWithMD5AndDES -jar /app.jar"]
+
+
+
+
