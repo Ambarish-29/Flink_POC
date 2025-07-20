@@ -205,6 +205,8 @@ services:
       - kafka-0
     ports:
       - "9003:9003"
+    environment:
+      JASYPT_ENCRYPTOR_PASSWORD: letsok
     volumes:
       - D:/Ambarish/learning/springboot/wtapp/whatsapp-kafka/cert:/etc/kafka/secrets/
     networks:

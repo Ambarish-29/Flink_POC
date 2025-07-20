@@ -5,8 +5,8 @@ import os
 
 load_dotenv()
 
-account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+account_sid = os.getenv('TWILIO_ACCOUNT_SID','')
+auth_token = os.getenv('TWILIO_AUTH_TOKEN', '')
 client = Client(account_sid, auth_token)
 
 # Flask app
@@ -19,7 +19,7 @@ FROM_NUMBER = 'whatsapp:+14155238886'  # Twilio sandbox number
 def send_whatsapp():
     try:
         data = request.get_json()
-        print(f"✅ Received request: {data}")  # 👈 Log incoming request data
+        print(f"✅ Received request: {data}") # 👈 Log incoming request data
 
         message_text = data.get('message')
         mobile_number = data.get('mobile_number')
@@ -29,9 +29,6 @@ def send_whatsapp():
         
         if not mobile_number:
             return jsonify({'error': 'Missing mobile number'}), 400
-        
-        if len(mobile_number) != 10 or not mobile_number.startswith == '91':
-            return jsonify({'error': 'Invalid mobile number'}), 400
         
         TO_NUMBER = f'whatsapp:+91{mobile_number}'
 
