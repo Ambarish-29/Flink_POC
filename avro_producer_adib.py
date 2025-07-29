@@ -29,16 +29,6 @@ def load_schema(path):
 # --- Schema Setup ---
 
 schemas = {
-    "cisotrxns": {
-        "schema": load_schema('./schemas/cisotrxns.avsc'),
-        "serializer": None,
-        "generate": lambda id: {
-            "serno": id,
-            #"i018_merch_type": random.choice(['3000', '3299', '3026', '3034', '7832', '3136', '3246', '5817', '5697', '3389', '5940', '7922', '7296', 'NULL', '6211', '3512', '3506', '5094', '7221', '3026', '3642']),
-            "i018_merch_type": str(random.randint(2950, 3350)),
-            "institution_id": 317
-        }
-    },
     "log_record": {
         "schema": load_schema('./schemas/log_record.avsc'),
         "serializer": None,
@@ -49,16 +39,6 @@ schemas = {
             #"pos_merch_type": str(random.randint(2950, 3350)),
             "pos_merch_type": str(random.randint(3025, 3035)),
             "amount_auth": round(random.uniform(10.0, 99999.99), 2)
-        }
-    },
-    "ctransactions": {
-        "schema": load_schema('./schemas/ctransactions.avsc'),
-        "serializer": None,
-        "generate": lambda id: {
-            "product": random.randint(50, 1600),
-            "i004_amt_trxn": round(random.uniform(0.00, 9999.99), 2),
-            "serno": id,
-            "caccserno": id + 1000
         }
     }
 }
