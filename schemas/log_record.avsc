@@ -1,0 +1,10 @@
+{
+  "namespace": "com.example",
+  "type": "record",
+  "name": "log_record",
+  "fields": [
+    { "name": "acct_1_nbr", "type": "string" },
+    { "name": "pos_merch_type", "type": "string" },
+    { "name": "amount_auth", "type": "double" }
+  ]
+}

@@ -96,6 +96,8 @@ services:
     volumes:
       - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
       - ./iceberg-warehouse:/opt/warehouse
+      - ./schemas/data:/opt/warehouse/data
+      
     depends_on:
       - kafka
 
@@ -112,3 +114,4 @@ services:
     volumes:
       - ./flink-conf.yaml:/opt/flink/conf/flink-conf.yaml
       - ./iceberg-warehouse:/opt/warehouse
+      - ./schemas/data:/opt/warehouse/data
